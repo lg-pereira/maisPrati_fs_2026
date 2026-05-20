@@ -1,6 +1,7 @@
 /** Variáveis globais */
 const Prompt = require('prompt-sync')()
 
+
 /* 1. Escreva um programa que recebe um número inteiro e verifica se ele é par ou ímpar
 utilizando uma estrutura de controle if. */
 
@@ -53,7 +54,8 @@ if (nota <= 3 ){
 Utilize switch-case para implementar a lógica de cada opção selecionada. */
 console.log(`\n----- EXERCICIO 4 --------\n`)
 
-let choose = Number(Prompt("Escolha uma das opções abaixo digitando o número \nOpção [1] - A joke\nOpção[2] - Luck number\nOpção[3] - Silence\nSua escolha? "))
+console.log("Escolha uma das opções abaixo digitando o número \nOpção [1] - A joke\nOpção[2] - Luck number\nOpção[3] - Silence")
+let choose = Number(Prompt("3Sua escolha? "))
 
 switch(choose){
     case 1:
@@ -118,46 +120,114 @@ if ( lado_A < (lado_B + lado_C) && lado_B < (lado_A + lado_C) && lado_C < (lado_
 média aritmética desses números.  */
 console.log(`\n----- EXERCICIO 7 --------\n`)
 
-console.log("Digite números decimais, digite 0 para parar e recebar a média.")
-let dec_sum = 0
-let counter = 0
-let dec_num
-do{
-    dec_num = parseFloat(Prompt())
-    if (isNaN(dec_num)){
-        dec_num = parseFloat(Prompt("Digite um número: "))
-    } else {
-        dec_sum += dec_num
-        counter++
-    }
-} while (dec_num != 0)
-console.log(`A média dos números é ${(dec_sum/counter).toFixed(2)}`)
+while(true) {
+    console.log("Digite números decimais, digite 0 para parar e recebar a média.")
+    let dec_sum = 0
+    let counter = 0
+    let dec_num
+    do{
+        dec_num = parseFloat(Prompt())
+        if (isNaN(dec_num)){
+            dec_num = parseFloat(Prompt("Digite um número: "))
+        } else {
+            dec_sum += dec_num
+            counter++
+        }
+    } while (dec_num != 0)
+    console.log(`A média dos números é ${(dec_sum/counter).toFixed(2)}`)
+    break
+}
 
 /* 8. Crie um programa que calcula o fatorial de um número fornecido pelo usuário utilizando
 um loop for ou while. */
+console.log(`\n----- EXERCICIO 8 --------\n`)
 
+let fact_num = Number(Prompt("Digite um número: "))
+let fact = fact_num
+while(fact_num >= 2){
+    fact = fact * --fact_num
+}
+console.log(fact)
 
 /* 9. Escreva um programa que gera e imprime os primeiros 10 números da sequência de
 Fibonacci utilizando um loop for. */
+console.log(`\n----- EXERCICIO 9 --------\n`)
 
+let j = 0
+let k = 1
+for (let i = 0; i < 10; i++){
+    let l = j + k
+    console.log(l)
+    j = k
+    k = l
+}
 
 /* 10. Faça um programa que leia 7 nomes de pessoas e guarde-os em um vetor. No final,
 mostre uma listagem com todos os nomes informados, na ordem inversa daquela em
 que eles foram informados. */
+console.log(`\n----- EXERCICIO 10 --------\n`)
 
+while (true) {
+    let names = []
+    do {
+        if (names.length === 7){
+            for (let i = 1; i <= names.length; i++) {
+            console.log(names[(names.length-i)])
+            }
+            break
+        }
+        let name = Prompt("Digite um nome: ")
+        names.push(name)
+    }
+    while (true)
+    break
+}
 
 /* 11. Crie um programa que leia o nome e a idade de 9 pessoas e guarde esses valores em
 dois vetores, em posições relacionadas. No final, mostre uma listagem contendo apenas
 os dados das pessoas menores de idade. */
+console.log(`\n----- EXERCICIO 11 --------\n`)
 
-
+while(true){
+    let names = []
+    let ages = []
+    do {
+        if (names.length === 4) {
+            for (person in ages){
+                if (ages[person] < 18){
+                    console.log(`${names[person]} tem ${ages[person]}`)
+                }
+            }
+            break
+        }
+        let nome = Prompt("Digite um nome: ")
+        names.push(nome)
+        let idade = Prompt("Digite uma idade: ")
+        ages.push(idade)
+    } while (names.length < 5)
+    break
+}
 /* 12. Faça uma função que recebe, por parâmetro, a altura (alt) e o sexo de uma pessoa
 eretorna o seu peso ideal. Para homens, calcular o peso ideal usando a fórmula: peso
 ideal = 72.7 x alt - 58 e, para mulheres, peso ideal = 62.1 x alt - 44.7 */
+console.log(`\n----- EXERCICIO 12 --------\n`)
+
+function weigth (h, t){
+    let type = t.toLowerCase()
+    let w
+    if (type === "f"|| type === "fem" || type === "feminino"|| type === "mulher") {
+        w = (62.1 * h) - 44.7
+    } else if (type === "m" || type === "masc" ||type === "masculino" ||type === "homem") {
+        w = (72.7 * h) - 58
+    } else {
+        console.log("Tipo não encontrado, informe se a pessoa é do sexo [M]asculino ou [F]eminino")
+    }
+    return w.toFixed(2)
+}
 
 
 /* 13. Uma indústria faz a folha mensal de pagamentos de seus 80 empregados baseada no
-seguinte: existe uma tabela com os dados de cada funcionalidade: matrícula, nome e
+seguinte: existe uma tabela com os dados de cada funcionário: matrícula, nome e
 salário bruto. Escreva um programa que leia e processe a tabela e emita (escreva na
 tela), cada funcionário, seu contracheque, cujo formato é dado a seguir:
 ○ Matrícula:
@@ -168,12 +238,32 @@ tela), cada funcionário, seu contracheque, cujo formato é dado a seguir:
 ○ (Dicas: desconto de 12%, salário líquido é a diferença entre salário bruto e a
 redução do INSS). */
 
+function contracheque (employees){
+    if (Array.isArray(employees)) {
+        for (let worker of employees) {
+            console.log(` 
+                ○ Matrícula: ${worker[0]}
+                ○ Nome: ${worker[1]}
+                ○ Salário bruto: ${worker[2]}
+                ○ Dedução INSS: ${(worker[2]*0.12)}
+                ○ Salário líquido: ${(worker[2]*0.88)}`)
+        }
+    } else {
+        console.log(`Entrada de dados incorreta, uma tabela deve ser fornecida como parâmetro \ncom Matrícula, Nome e Salário Bruto. \nExemplo: [
+            [1, 'Luiz', 1200],
+            [2, "Ana", 2500],
+            [3, "Carlos", 1800]
+         ]`)
+    }
+    return
+}
 
 /* 14. A prefeitura de uma cidade fez uma pesquisa entre os seus habitantes, coletando dados
 sobre salário e número de filhos. Faça uma função que leia esses dados para um
 número não determinado de pessoas e retorne a média de salário da população, a
 média do número de filhos, o maior salário e o percentual de pessoas com salário até
 R$350,00. */
+
 
 
 /* 15. Criar e imprimir a matriz identidade MI[1..7,1..7] em que todos os elementos da diagonal
