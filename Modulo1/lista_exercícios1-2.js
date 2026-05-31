@@ -192,10 +192,10 @@ while(true){
     let names = []
     let ages = []
     do {
-        if (names.length === 4) {
+        if (names.length === 9) {
             for (person in ages){
                 if (ages[person] < 18){
-                    console.log(`${names[person]} tem ${ages[person]}`)
+                    console.log(`${names[person]} tem ${ages[person]} anos`)
                 }
             }
             break
@@ -204,7 +204,7 @@ while(true){
         names.push(nome)
         let idade = Prompt("Digite uma idade: ")
         ages.push(idade)
-    } while (names.length < 5)
+    } while (names.length < 10)
     break
 }
 /* 12. Faça uma função que recebe, por parâmetro, a altura (alt) e o sexo de uma pessoa
@@ -237,6 +237,7 @@ tela), cada funcionário, seu contracheque, cujo formato é dado a seguir:
 ○ Salário líquido:
 ○ (Dicas: desconto de 12%, salário líquido é a diferença entre salário bruto e a
 redução do INSS). */
+console.log(`\n----- EXERCICIO 13 --------\n`)
 
 function contracheque (employees){
     if (Array.isArray(employees)) {
@@ -250,6 +251,7 @@ function contracheque (employees){
         }
     } else {
         console.log(`Entrada de dados incorreta, uma tabela deve ser fornecida como parâmetro \ncom Matrícula, Nome e Salário Bruto. \nExemplo: [
+            [Matricula, 'Nome', Salário],
             [1, 'Luiz', 1200],
             [2, "Ana", 2500],
             [3, "Carlos", 1800]
@@ -263,36 +265,198 @@ sobre salário e número de filhos. Faça uma função que leia esses dados para
 número não determinado de pessoas e retorne a média de salário da população, a
 média do número de filhos, o maior salário e o percentual de pessoas com salário até
 R$350,00. */
+console.log(`\n----- EXERCICIO 14 --------\n`)
 
+function citizens (city){
+    if (Array.isArray(city)){
+        let salMed = 0
+        let childMed = 0
+        let sal350 = 0
+        let salMax = 0
+        for (let citizen of city) {
+            salMed += citizen[0]
+            childMed += citizen[1]
+            if (citizen[0] <= 350){
+                sal350++
+            }
+            if (citizen[0] > salMax){
+                salMax = citizen[0]
+            }
+        }
+        salMed = (salMed/city.length).toFixed(2)
+        childMed = Math.floor(childMed/city.length)
+        sal350 = ((sal350/city.length)*100).toFixed(2)
+        let response = {
+            "Média salarial": salMed,
+            "Média de filhos": childMed,
+            "Maior salário": salMax,
+            "Salário até R$ 350": `${sal350}%`
+        }
+        return response
+    }  else {
+        console.log(`Entrada de dados incorreta, uma tabela deve ser fornecida como parâmetro \ncom Salário e Número de filhos. \nExemplo: [
+            [Salário, Filhos],
+            [1200, 1],
+            [2500, 4],
+            [1800, 6]
+         ]`)
+    }
+}
 
 
 /* 15. Criar e imprimir a matriz identidade MI[1..7,1..7] em que todos os elementos da diagonal
 principal são iguais a 1 e os demais são nulos.  */
+console.log(`\n----- EXERCICIO 15 --------\n`)
+
+while (true){
+    let mi = []
+    for (let i = 0; i < 7; i++){ //Deveria ser menor ou igual <= e i = 1
+        if (!Array.isArray(mi[i])){
+                mi[i] = new Array()
+            }
+        for (let j = 0; j < 7; j++ ){
+            
+            if (i === j) {
+                mi[i][j] = 1
+            } else {
+                mi[i][j]
+            }
+        }
+    }
+    console.table(mi)
+    break
+}
 
 
 /* 16. Dada uma matriz M[1..6,1..8], criar um vetor C que contenha, em cada posição, a
 quantidade de elementos negativos da linha correspondente de M.  */
+console.log(`\n----- EXERCICIO 16 --------\n`)
 
+function negativeNumbers (matriz){
+    let vetor = new Array()
+    let counter = 0
+    for (let i = 0; i < 7; i++){
+        for (let j = 0; j < 9; j++) {
+            if (matriz[i][j] < 0 ){
+                counter++
+            }
+        }
+        vetor[i] = counter
+        counter = 0
+    }
+    return vetor
+}
+
+let vetorC = negativeNumbers(matriz)
 
 /* 17. Dado o objeto pessoa com propriedades nome e idade, acesse e imprima o valor de
 idade. Adicione uma nova propriedade chamada email ao objeto pessoa que já possui
 nome e idade. */
+console.log(`\n----- EXERCICIO 17 --------\n`)
 
+let pessoa = {
+    nome: "Luiz",
+    idade: 31
+}
+
+console.log(pessoa.idade)
+pessoa.email = "luiz@email.com.br"
 
 /* 18. Crie um objeto chamado dados que contém várias propriedades, incluindo números,
 strings e arrays. Escreva uma função que retorne um novo objeto apenas com as
 propriedades que são arrays. */
+console.log(`\n----- EXERCICIO 18 --------\n`)
 
+let dados = {
+    prop1: 1000,
+    prop2: [],
+    prop3: "strings",
+    prop4: 10001,
+    prop5: "Hello world!",
+    prop6: [],
+    prop7: {
+        subProp: 123,
+        subProp: "name"
+    }
+}
+
+function newObjArray (obj){
+    let objArray = new Object()
+    let props = Object.keys(obj)
+    props.forEach((props) => {
+        if (Array.isArray(obj[props])) {
+            objArray[props] = obj[props]
+        }
+    })
+    return objArray
+}
+
+console.log(newObjArray(dados))
 
 /* 19. Dado dois objetos, obj1 e obj2, escreva uma função que crie um novo objeto
 combinando as propriedades de ambos, onde as propriedades de obj2 têm
 precedência sobre as do obj1 em caso de conflitos. */
+console.log(`\n----- EXERCICIO 19 --------\n`)
 
+function newObj (obj1, obj2) {
+    let newObj = obj2
+    for (let [prop, value] of Object.entries(obj1)){
+            if (newObj[prop] === undefined) {
+                newObj[prop] = value
+            }
+    }
+    return newObj
+}
 
 /* 20. Dado um array de strings, crie um objeto onde cada string é uma chave, e seu valor é o
 número de vezes que a string aparece no array. */
+console.log(`\n----- EXERCICIO 20 --------\n`)
 
+function objString (table){
+    let objString = new Object()
+    for (string of table) {
+        let temp = string
+        let counter = table.filter((string) => temp === string)
+        if (objString[string] === undefined) {
+            objString[string] = counter.length
+        }
+        return objString
+    }
+}
 
 /* 21. Suponha que você tem um array de objetos onde cada objeto representa uma venda
 com vendedor e valor. Escreva uma função que retorne um objeto que sumarize o total
 de vendas por vendedor. */
+console.log(`\n----- EXERCICIO 20 --------\n`)
+
+//A função que criei deve lidar com o array de objetos mesmo que as entradas forem em ordens diferentes
+// [ {vendedor:"X", valor:1}, {valor:2, vendedor:Ÿ}]
+function contabil(table){
+    let total = new Object()
+    for (let obj of table){
+        let temp_seller
+        let temp_value
+        for (let key of Object.values(obj)){
+            if (isNaN(key)){
+                temp_seller = key
+                if (total[temp_seller] === undefined){
+                    total[temp_seller] = 0
+                    if (!isNaN(key) || temp_value !== (0 || undefined) && total[temp_seller] !== undefined){
+                        total[temp_seller] += temp_value
+                    }
+                } else {
+                    if (temp_value !== undefined){
+                        total[temp_seller] += temp_value
+                    }
+                }
+            } else {
+                if (total[temp_seller] !== undefined){
+                    total[temp_seller] += key
+                } else {
+                    temp_value = key
+                }
+            }
+        }
+    }
+    return total
+}

@@ -1,33 +1,83 @@
 const Prompt = require('prompt-sync')()
 
-let table = [
-  [1, "Luiz", 1200],
-  [2, "Ana", 2500],
-  [3, "Carlos", 1800],
-  [4, "Maria", 3200],
-  [5, "João", 1500],
-  [6, "Fernanda", 2700],
-  [7, "Pedro", 2100],
-  [8, "Juliana", 3500],
-  [9, "Lucas", 1300],
-  [10, "Beatriz", 2900]
-];
 
-function contracheque (employees){
-    if (Array.isArray(employees)) {
-        for (let worker of employees) {
-            console.log(` 
-                ○ Matrícula: ${worker[0]}
-                ○ Nome: ${worker[1]}
-                ○ Salário bruto: ${worker[2]}
-                ○ Dedução INSS: ${(worker[2]*0.12)}
-                ○ Salário líquido: ${(worker[2]*0.88)}
-            `)
+let table = [
+    {seller: "Jhon", value: 1200},
+    {seller: "Rose", value: 1300},
+    {seller: "Mark", value: 100},
+    {seller: "Lea", value: 500},
+    {seller: "Jhon", value: 120},
+    {seller: "Lea", value: 3500},
+    {seller: "Jhon", value: 80},
+    {seller: "Rose", value: 5000},
+    {seller: "Mark", value: 320},
+    {seller: "Lea", value: 4300},
+    {seller: "Lea", value: 200},
+    {seller: "Renan", value: 180},
+    {seller: "Val", value: 450},
+    {value: 109, seller:"Val"},
+    {value: 109, seller:"Jhon"},
+    {value: 109, seller:"Lea"},
+    {value: 109, seller:"Mark"},
+    {value: 109, seller:"Luiz"},
+    {seller: "Rose", value: 980},
+    {seller: "Mark", value: 3200}
+]
+
+let table2 = [
+    {value: 100, seller:"Luiz"},
+    {value: 100, seller:"Ana"},
+    {value: 100, seller:"Joao"},
+    {value: 100, seller:"Jeh"},
+    {value: 100, seller:"Luiz"},
+]
+
+// function contabil(table){
+//     let total = new Object()
+//     for (let obj of table){
+//         let temp
+//         for (let key of Object.values(obj)){
+//             if (isNaN(key)){
+//                 temp = key
+//                 if (total[key] === undefined){
+//                     total[key] = 0
+//                 }
+//             } else {
+//                 total[temp] += key
+//             }
+//         }
+//     }
+//     return total
+// }
+
+function contabil(table){
+    let total = new Object()
+    for (let obj of table){
+        let temp_seller
+        let temp_value
+        for (let key of Object.values(obj)){
+            if (isNaN(key)){
+                temp_seller = key
+                if (total[temp_seller] === undefined){
+                    total[temp_seller] = 0
+                    if (!isNaN(key) || temp_value !== (0 || undefined) && total[temp_seller] !== undefined){
+                        total[temp_seller] += temp_value
+                    }
+                } else {
+                    if (temp_value !== undefined){
+                        total[temp_seller] += temp_value
+                    }
+                }
+            } else {
+                if (total[temp_seller] !== undefined){
+                    total[temp_seller] += key
+                } else {
+                    temp_value = key
+                }
+            }
         }
-    } else {
-        console.log("Entrada de dados incorreta, a tabela deve ser fornecida como parâmetro.")
     }
-    return
+    return total
 }
 
-console.log(contracheque(table))
+console.log(contabil(table))
