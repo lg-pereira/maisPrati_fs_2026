@@ -4,7 +4,6 @@ const Prompt = require('prompt-sync')()
 
 /* 1. Escreva um programa que recebe um número inteiro e verifica se ele é par ou ímpar
 utilizando uma estrutura de controle if. */
-
 console.log(`\n----- EXERCICIO 1 --------\n`)
 
 let num = 9

@@ -1,45 +1,259 @@
 /* LlSTA DE TAREFAS 3 - T1/2026 */
+/** Variáveis globais */
+const Prompt = require('prompt-sync')()
 
+//Função para deixar a primeira letra Maíuscula da Palavra
+function Normalize (t) {
+    let text = t.at(0).toUpperCase()+t.substr(1)
+    return text
+}
 
 /* 1. Crie um objeto representando um produto com as propriedades: nome, preço,
 categoria e quantidade em estoque. Use for...in para percorrer e exibir todas as
 propriedades e seus valores. Em seguida, adicione uma nova propriedade
 desconto ao objeto e exiba o preço final calculado. */
+console.log(`\n----- EXERCICIO 1 --------\n`)
+
+let obj1 = {
+    item: "Nike Shocks 950",
+    price: 500,
+    category: "Tenis",
+    stock: 5
+}
+
+for (prop in obj1) {
+    console.log(`${Normalize(prop)}: ${obj1[prop]}`)
+}
+obj1.discountPercent = 10
+console.log("Preço final:",obj1.price*(1-(obj1.discountPercent/100)))
 
 /* 2. Crie dois objetos representando personagens de um jogo, cada um com as
 propriedades: nome, vida, ataque e defesa. Use for...in para exibir os atributos de
-cada personagem lado a lado e determine qual deles tem maior poder total
+cada personagem lado a lado e determine qual deles tem maior Total Power
 (soma de vida + ataque + defesa). */
+console.log(`\n----- EXERCICIO 2 --------\n`)
+
+let caracter1 = {
+    name: "Big Mike",
+    life: 280,
+    attack: 40,
+    defense: 12
+}
+
+let caracter2 = {
+    name: "Stuart Little",
+    life: 250,
+    attack: 35,
+    defense: 55
+}
+
+while (true){
+    console.log(`${caracter1.name} vs ${caracter2.name}`)
+    caracter1["Total Power"] = 0
+    caracter2["Total Power"] = 0
+
+    for (attribute in caracter1){
+        if (attribute === "name") continue
+        console.log(`${Normalize(attribute)}: ${caracter1[attribute]} ${caracter1[attribute] > caracter2[attribute] ? ">" : "<"} ${caracter2[attribute]}`)
+        caracter1["Total Power"] += caracter1[attribute]
+        caracter2["Total Power"] += caracter2[attribute]
+    }
+    let winner = caracter1["Total Power"]  > caracter2["Total Power"] ? caracter1.name : caracter2.name
+    console.log(`O vencedor é ${winner}`)
+    break
+}
 
 /* 3. Crie um objeto representando um funcionário com nome, cargo, salário e anos de
 experiência. Use for...in para listar todos os dados. Com base nos anos de
 experiência, calcule e exiba o bônus anual: até 2 anos = 5% do salário, de 3 a 5
 anos = 10%, acima de 5 anos = 15%. */
+console.log(`\n----- EXERCICIO 3 --------\n`)
+
+let worker = {
+    nome: "Francisco Camargo",
+    cargo: "Supervisor",
+    salario: 10000,
+    anos: 20
+}
+
+while(true){
+    for (prop in worker){
+        if (prop === "anos"){
+            console.log(`${Normalize(prop)}: ${worker[prop]}`)
+            if (worker[prop] <= 2){
+                console.log(`Bônus Anual: ${(worker.salario*0.05).toFixed(2)}`)
+            } else if (worker[prop] > 2 && worker[prop] <= 5 ){
+                console.log(`Bônus Anual: ${(worker.salario*0.10).toFixed(2)}`)
+            } else {
+                console.log(`Bônus Anual: ${(worker.salario*0.15).toFixed(2)}`)
+            }
+            continue
+        }
+        console.log(`${Normalize(prop)}: ${worker[prop]}`)
+    }
+    break
+}
 
 /* 4. Crie um objeto onde cada chave é o nome de um item e o valor é a quantidade
 no inventário do jogador (ex: { espada: 1, poção: 5, escudo: 2 }). Use for...in para
 listar o inventário completo. Permita que o usuário informe um item para usar:
 reduza a quantidade em 1 ou exiba "item esgotado" se for zero. */
+console.log(`\n----- EXERCICIO 4 --------\n`)
+
+let bag = {
+    sword: 2,
+    shield: 3,
+    hammer: 1,
+    axe: 2,
+    medkit: 5,
+    juice: 4,
+    barbecue: 1,
+}
+
+function useItem (t){
+    let item = t.toLowerCase()
+    if (bag[item] < 1) console.log("Item esgotado")
+    else {
+        bag[item]--
+        console.log(`${Normalize(item)} restantes: ${bag[item]}`)
+    }
+}
+
+while (true){
+    console.log("Abrindo o inventário")
+    for (item in bag){
+        console.log(`${Normalize(item)}: ${bag[item]}`)
+    }
+    let itemChoose = Prompt("Qual item deseja usar? \n")
+    useItem(itemChoose)
+    break
+}
 
 /* 5. Crie um objeto representando o orçamento mensal de uma pessoa, com
 categorias como alimentação, transporte, lazer e saúde, cada uma com valor
 planejado e valor gasto. Use for...in para percorrer as categorias e exibir se cada
 uma ficou dentro ou acima do orçamento, e calcule o saldo geral do mês. */
+console.log(`\n----- EXERCICIO 5 --------\n`)
+
+let budget = {
+    "moradia": {
+        plan: 2000,
+        spent: 1750
+    },
+    "alimentação": {
+        plan: 1500,
+        spent: 1250
+    },
+    "saúde": {
+        plan: 400,
+        spent: 800
+    },
+    "combustível": {
+        plan: 400,
+        spent: 350
+    },
+    "recreação": {
+        plan: 200,
+        spent: 100
+    }
+}
+
+do {
+    let amount = 0
+    for ( item in budget){
+        let verify = budget[item]
+        console.log(`${Normalize(item)}: ${verify.spent <= verify.plan ? "Dentro do orçamento" : "Acima do orçamento"}`)
+        amount += (verify.plan-verify.spent)
+    }
+    console.log(`Saldo Geral do Mês: ${amount}`)
+    break
+} while (true)
 
 /* 6. Crie um array de objetos representando músicas, cada uma com título, artista e
 duração em segundos. Use for...of para exibir cada música no formato "Artista —
 Título (mm:ss)". Ao final, use forEach para somar a duração total e exiba-a no
 mesmo formato. */
+console.log(`\n----- EXERCICIO 6 --------\n`)
+
+let album = [
+    {"título": "Eu Sei", "artista": "Charlie Brown Jr.", "duração": 214},
+    {"título": "Dias de Luta", "artista": "CPM 22", "duração": 198},
+    {"título": "Trem Fantasma", "artista": "Pitty", "duração": 223},
+    {"título": "Admirável Chip Novo", "artista": "Pitty", "duração": 187},
+    {"título": "Só por Uma Noite", "artista": "Charlie Brown Jr.", "duração": 241},
+    {"título": "Nenhum de Nós", "artista": "NX Zero", "duração": 205},
+    {"título": "Insubstituível", "artista": "CPM 22", "duração": 217},
+    {"título": "Tudo Que Você Quiser", "artista": "NX Zero", "duração": 193}
+]
+
+function NormalizeTime (time){
+    let sec = Math.floor(time%60)
+    if (sec < 10) sec = "0"+sec
+    let min = Math.floor(time/60)
+    if (min < 10) min = "0"+min
+    return {m: min, s: sec}
+}
+
+while(true) {
+    let totalTime = 0
+    for (music of album){
+        let time = NormalizeTime(music.duration)
+        console.log(`${music.artist} — ${music.title} (${time.m}:${time.s})`)
+    }
+    album.forEach((music) => totalTime += music.duration)
+    totalTime = NormalizeTime(totalTime)
+    console.log(`Tempo total: ${totalTime.m}:${totalTime.s} min`)
+    break
+}
 
 /* 7. Crie um array de objetos com nome e nota de 6 alunos. Use for...of para classificar
 cada aluno (Aprovado, Recuperação ou Reprovado) e exibir o resultado. Use
 forEach para calcular e exibir separadamente a média dos aprovados e a média
 dos reprovados. */
+console.log(`\n----- EXERCICIO 7 --------\n`)
+
+let classe = [
+    {nome: "Luizinho", nota: 6} ,
+    {nome: "Juquinha", nota: 5 },
+    {nome: "Zézinho", nota: 3 },
+    {nome: "Floriano", nota: 8 },
+    {nome: "Policarpo", nota: 4 },
+    {nome: "Teresa", nota: 10}
+]
+
+do {
+    for (aluno of classe) {
+        let status = aluno.nota >= 7 ? "Aprovado" : aluno.nota <= 4 ? "Reprovado" : "Recuperação"
+        aluno.status = status
+        console.log(`${aluno.nome}: ${status}`)
+    }
+
+    classe.aprovados = {notas: 0, alunos: 0, media () { return (this.notas/this.alunos).toFixed(2)}}
+    classe.reprovados = {notas: 0, alunos: 0, media () {return (this.notas/this.alunos).toFixed(2)}}
+
+    classe.forEach((aluno) => {
+        if(aluno.status === "Aprovado"){
+            classe.aprovados.notas += aluno.nota
+            classe.aprovados.alunos++
+        } else if (aluno.status === "Reprovado") {
+            classe.reprovados.notas += aluno.nota
+            classe.reprovados.alunos++
+        }     
+    })
+
+    console.log(`Média dos Aprovados: ${classe.aprovados.media()}`)
+    console.log(`Média dos Reprovados: ${classe.reprovados.media()}`)
+    break
+
+} while(true)
 
 /* 8. Crie um array de objetos representando produtos com nome, preço e quantidade.
 Use forEach para calcular o valor total em estoque de cada produto (preço ×
 quantidade) e exibir um relatório. Ao final, exiba o valor total geral de todo o
 estoque. */
+console.log(`\n----- EXERCICIO 8 --------\n`)
+
+
 
 /* 9. Crie um array de objetos onde cada objeto representa um contato com nome,
 telefone e e-mail. Use forEach para listar todos os contatos formatados. Permita
