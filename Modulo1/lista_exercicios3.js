@@ -8,6 +8,12 @@ function Normalize (t) {
     return text
 }
 
+//Função para gerar números aleatório com base no mínimo e máximo
+function Random(min, max){
+    let number = Math.floor(Math.random()* (max++ - min + 1 ) + min)
+    return number
+}
+
 /* 1. Crie um objeto representando um produto com as propriedades: nome, preço,
 categoria e quantidade em estoque. Use for...in para percorrer e exibir todas as
 propriedades e seus valores. Em seguida, adicione uma nova propriedade
@@ -16,9 +22,9 @@ console.log(`\n----- EXERCICIO 1 --------\n`)
 
 let obj1 = {
     item: "Nike Shocks 950",
-    price: 500,
+    price: 750,
     category: "Tenis",
-    stock: 5
+    stock: 20
 }
 
 for (prop in obj1) {
@@ -35,16 +41,16 @@ console.log(`\n----- EXERCICIO 2 --------\n`)
 
 let caracter1 = {
     name: "Big Mike",
-    life: 280,
-    attack: 40,
-    defense: 12
+    life: Random(350, 1500),
+    attack: Random(20, 80),
+    defense: Random(10, 40)
 }
 
 let caracter2 = {
     name: "Stuart Little",
-    life: 250,
-    attack: 35,
-    defense: 55
+    life: Random(350, 1500),
+    attack: Random(20, 50),
+    defense: Random(30, 100)
 }
 
 while (true){
@@ -72,8 +78,8 @@ console.log(`\n----- EXERCICIO 3 --------\n`)
 let worker = {
     nome: "Francisco Camargo",
     cargo: "Supervisor",
-    salario: 10000,
-    anos: 20
+    salario: Random(2220, 10550),
+    anos: Random(1, 10)
 }
 
 while(true){
@@ -124,7 +130,7 @@ while (true){
     for (item in bag){
         console.log(`${Normalize(item)}: ${bag[item]}`)
     }
-    let itemChoose = Prompt("Qual item deseja usar? \n")
+    let itemChoose = Prompt("Digite o item deseja usar: ")
     useItem(itemChoose)
     break
 }
@@ -176,14 +182,14 @@ mesmo formato. */
 console.log(`\n----- EXERCICIO 6 --------\n`)
 
 let album = [
-    {"título": "Eu Sei", "artista": "Charlie Brown Jr.", "duração": 214},
-    {"título": "Dias de Luta", "artista": "CPM 22", "duração": 198},
-    {"título": "Trem Fantasma", "artista": "Pitty", "duração": 223},
-    {"título": "Admirável Chip Novo", "artista": "Pitty", "duração": 187},
-    {"título": "Só por Uma Noite", "artista": "Charlie Brown Jr.", "duração": 241},
-    {"título": "Nenhum de Nós", "artista": "NX Zero", "duração": 205},
-    {"título": "Insubstituível", "artista": "CPM 22", "duração": 217},
-    {"título": "Tudo Que Você Quiser", "artista": "NX Zero", "duração": 193}
+    {title: "Eu Sei", artist: "Charlie Brown Jr.", duration: 214},
+    {title: "1 minuto para o fim do mundo", artist: "CPM 22", duration: 198},
+    {title: "O Papa é Pop!", artist: "Engenheiros do Havaí", duration: 223},
+    {title: "Admirável Chip Novo", artist: "Pitty", duration: 187},
+    {title: "Amanhã Colorido", artist: "Cidadão Quem", duration: 241},
+    {title: "Paz e Amor", artist: "Nenhum de Nós", duration: 205},
+    {title: "Somewhere only we know", artist: "Lily Allen", duration: 217},
+    {title: "Sound of Silence", artist: "Disturbed", duration: 193}
 ]
 
 function NormalizeTime (time){
@@ -213,12 +219,12 @@ dos reprovados. */
 console.log(`\n----- EXERCICIO 7 --------\n`)
 
 let classe = [
-    {nome: "Luizinho", nota: 6} ,
-    {nome: "Juquinha", nota: 5 },
-    {nome: "Zézinho", nota: 3 },
-    {nome: "Floriano", nota: 8 },
-    {nome: "Policarpo", nota: 4 },
-    {nome: "Teresa", nota: 10}
+    {nome: "Luizinho", nota: Random(3, 10)} ,
+    {nome: "Juquinha", nota: Random(3, 10) },
+    {nome: "Zézinho", nota: Random(3, 10) },
+    {nome: "Floriano", nota: Random(3, 10) },
+    {nome: "Policarpo", nota: Random(3, 10) },
+    {nome: "Teresa", nota: Random(3, 10)}
 ]
 
 do {
@@ -253,24 +259,251 @@ quantidade) e exibir um relatório. Ao final, exiba o valor total geral de todo 
 estoque. */
 console.log(`\n----- EXERCICIO 8 --------\n`)
 
+let stock = [
+    {item: "Mouse Bluetooth", price: Random(50, 100), stock: Random(1, 50)},
+    {item: "Mouse Gamer", price: Random(250, 750), stock: Random(1, 10)},
+    {item: "Headphone", price: Random(150, 300), stock: Random(1, 30)},
+    {item: "Teclado Gamer", price: Random(250, 750), stock: Random(1, 20)},
+    {item: "Mouse Pad", price: Random(25, 50), stock: Random(1, 100)},
+    {item: "Macbook Pro 14'", price: Random(6000, 10250), stock: Random(1, 10)},
+    {item: "Hub USB-c", price: Random(150, 250), stock: Random(1, 10)},
+    {item: "Fone Bluetooth", price: Random(10, 250), stock: Random(1, 50)},
+    {item: "Cabo USB-c", price: Random(50, 70), stock: Random(1, 25)}
+]
 
+let totalStock = 0
+stock.forEach((item) => {
+    let itemValue = item.price*item.stock
+    console.log(`${item.item}: R$ ${itemValue.toFixed(2)}`)
+    totalStock += itemValue
+})
+console.log(`Valor Total dos Produtos: R$ ${totalStock.toFixed(2)}`)
 
 /* 9. Crie um array de objetos onde cada objeto representa um contato com nome,
 telefone e e-mail. Use forEach para listar todos os contatos formatados. Permita
 buscar um contato pelo nome usando for...of e exiba os dados encontrados ou
 uma mensagem de "não encontrado". */
+console.log(`\n----- EXERCICIO 9 --------\n`)
+
+let contacts= [
+    {name: "Antonio", phone: 47987654321, email: "antonio.silva@gmail.com"},
+    {name: "Maria", phone: 47988765432, email: "maria.santos@gmail.com"},
+    {name: "Carlos", phone: 47989876543, email: "carlos.oliveira@gmail.com"},
+    {name: "Juliana", phone: 47990987654, email: "juliana.pereira@gmail.com"},
+    {name: "Fernando", phone: 47991098765, email: "fernando.costa@gmail.com"},
+    {name: "Beatriz", phone: 47992109876, email: "beatriz.alves@gmail.com"},
+    {name: "Roberto", phone: 47993210987, email: "roberto.ferreira@gmail.com"},
+    {name: "Amanda", phone: 47994321098, email: "amanda.gomes@gmail.com"},
+    {name: "Lucas", phone: 47995432109, email: "lucas.martins@gmail.com"},
+    {name: "Sophia", phone: 47996543210, email: "sophia.rocha@gmail.com"}
+]
+
+contacts.forEach((contact) => {
+    console.log(`Nome: ${contact.name}\nTelefone: ${contact.phone}\nE-mail: ${contact.email}\n----------`)
+})
+
+function searchContact (name) {
+    for (contact of contacts) {
+        if (contact.name === name) {
+            return `Nome: ${contact.name}\nTelefone: ${contact.phone}\nE-mail: ${contact.email}`
+        }
+    }
+    return "Contato não encontrado."
+}
+
+while (true) {
+    contacts.forEach((contact) => {
+    console.log(`Nome: ${contact.name}\nTelefone: ${contact.phone}\nE-mail: ${contact.email}\n----------`)
+})
+    let search = Prompt("Digite um nome para buscar na agenda: ")
+    search = searchContact(search)
+    console.log(search)
+    break
+}
 
 /* 10. Implemente uma pilha usando um array para simular o histórico de um
 navegador. Crie as funções visitar(pagina) (push), voltar() (pop) e paginaAtual()
 (peek). Simule uma sessão: visite 4 páginas, volte 2 vezes e exiba a página atual a
 cada operação. */
+console.log(`\n----- EXERCICIO 10 --------\n`)
+
+class Stack {
+    constructor () {
+        this.itens = []
+    }
+
+    visitar(page) {
+        this.itens.push(page)
+    }
+    
+    voltar() {
+        if (!this.isEmpty()) {
+            this.itens.pop()
+        } else {
+            console.log("Nenhuma página no Histórico")
+        }
+    }
+    
+    paginaAtual() {
+        let last = this.itens.length-1
+        console.log(`Página atual: ${this.itens[last]}`)
+    }
+
+    isEmpty(){
+        return this.itens.length === 0
+    }
+
+
+}
+
+let navegador = new Stack
+navegador.visitar("Google")
+navegador.paginaAtual()
+navegador.visitar("Instagarm")
+navegador.paginaAtual()
+navegador.visitar("Facebook")
+navegador.paginaAtual()
+navegador.visitar("MDNdocs")
+navegador.paginaAtual()
+navegador.voltar()
+navegador.paginaAtual()
+navegador.voltar()
+navegador.paginaAtual()
+
 
 /* 11. Implemente uma fila usando um array para simular o atendimento de uma
 clínica. Crie as funções chegarPaciente(nome) (enqueue), chamarProximo()
 (dequeue) e exibirFila(). Simule a chegada de 5 pacientes e o atendimento de 3,
 exibindo o estado da fila a cada operação. */
+console.log(`\n----- EXERCICIO 11 --------\n`)
+
+class Queue {
+    constructor () {
+        this.itens = []
+    }
+
+    chegarPaciente(name) {
+        this.itens.push(name)
+    }
+
+    chamarProximo() {
+        if (this.isEmpty()){
+            console.log("Fila está vazia.")
+        } else {
+            let paciente = this.itens.shift()
+            console.log(`Atendendo ${paciente}`)
+        }
+    }
+
+    exibirFila() {
+        console.log(this.itens.join(" <- "))
+    }
+
+    isEmpty() {
+        return this.itens.length === 0
+    }
+
+}
+
+let consultorio = new Queue
+
+consultorio.chegarPaciente("Luiz")
+consultorio.exibirFila()
+consultorio.chegarPaciente("João")
+consultorio.exibirFila()
+consultorio.chegarPaciente("Jéssica")
+consultorio.exibirFila()
+consultorio.chegarPaciente("Rafael")
+consultorio.exibirFila()
+consultorio.chegarPaciente("Fernanda")
+consultorio.exibirFila()
+consultorio.chegarPaciente("Leo")
+consultorio.exibirFila()
+consultorio.chamarProximo()
+consultorio.exibirFila()
+consultorio.chamarProximo()
+consultorio.exibirFila()
+consultorio.chamarProximo()
+consultorio.exibirFila()
 
 /* 12. Implemente uma lista ligada simples usando nós ({ valor, proximo }). Crie as
 funções adicionar(tarefa), remover(tarefa) e exibir() que percorre todos os nós.
 Simule um gerenciador de tarefas: adicione 4 tarefas, remova uma pelo nome e
 exiba a lista antes e depois.*/
+console.log(`\n----- EXERCICIO 12 --------\n`)
+
+class Node {
+    constructor (value) {
+        this.value = value
+        this.next = null
+    }
+}
+
+class LinkedList {
+    constructor () {
+        this.top = null
+        this.size = 0
+    }
+
+    adicionar(task){
+        let node = new Node(task)
+        node.next = this.top
+        this.top = node
+        this.size++
+    }
+
+    remover(task){
+        let previousItem = null
+        let item = this.top
+        for (let i = 0; i < this.size; i++){
+            if (this.top.value === task) {
+                this.top = this.top.next
+                this.size--
+                return
+            } else if (item.value === task){
+                previousItem.next = item.next
+                this.size--
+                return
+            }
+            previousItem = item
+            item = item.next
+            
+        }
+        console.log(`${task} não encontrada.`)
+    }
+
+    exibir() {
+        let item = this.top
+        let resultado = ""
+        for (let i = 0; i < this.size; i++){
+            if (item.next !== null){
+                resultado += `Tarefa ${i+1}: ${item.value}\n`
+                item = item.next
+            } else if ( item.next === null){
+                resultado += `Tarefa ${i+1}: ${item.value}`
+            }
+        }
+        console.log(resultado)
+    }
+
+    peek(){
+        return this.top ? this.top.value : null
+    }
+
+    size(){
+        return this.size
+    }
+
+}
+
+let gerenciador = new LinkedList
+gerenciador.adicionar("Chrome")
+gerenciador.adicionar("Mozilla")
+gerenciador.adicionar("VS_Code")
+gerenciador.adicionar("WhatsApp")
+gerenciador.adicionar("Safari")
+gerenciador.exibir()
+console.log("---------")
+gerenciador.remover("WhatsApp")
+gerenciador.exibir()
+console.log("---------")

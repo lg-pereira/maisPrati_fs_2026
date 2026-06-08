@@ -7,31 +7,8 @@ function Normalize (t) {
     return text
 }
 
-let classe = [
-    {nome: "Luizinho", nota: 6} ,
-    {nome: "Juquinha", nota: 7 },
-    {nome: "Zézinho", nota: 8 },
-    {nome: "Floriano", nota: 10 },
-    {nome: "Policarpo", nota: 3 },
-    {nome: "Quaresma", nota: 10}
-]
-
-for (aluno of classe) {
-    let status = aluno.nota >= 7 ? "Aprovado" : aluno.nota <= 4 ? "Reprovado" : "Recuperação"
-    aluno.status = status
-    console.log(`${aluno.nome}: ${status}`)
+//Função para gerar números aleatório com base no mínimo e máximo
+function Random(min, max){
+    let number = Math.floor(Math.random()* (max++ - min + 1 ) + min)
+    return number
 }
-classe.aprovados = {notas: 0, alunos: 0, media () { return (this.notas/this.alunos).toFixed(2)}}
-classe.reprovados = {notas: 0, alunos: 0, media () {return (this.notas/this.alunos).toFixed(2)}}
-
-classe.forEach((aluno) => {
-    if(aluno.status === "Aprovado"){
-        classe.aprovados.notas += aluno.nota
-        classe.aprovados.alunos++
-    } else if (aluno.status === "Reprovado") {
-        classe.reprovados.notas += aluno.nota
-        classe.reprovados.alunos++
-    }     
-})
-console.log(classe.aprovados.media())
-console.log(classe.reprovados.media())

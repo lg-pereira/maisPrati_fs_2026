@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exemplo de Formulário</title>
+  </head>
+  <body>
+    <form action="#">
+      <h1>Cadastro Inicial</h1>
+      <label for="name">Nome</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Digite seu nome completo"
+        required
+      />
+      <br /><br />
+      <label for="phone">Telefone</label>
+      <input type="tel" name="phone" id="phone" placeholder="(XX) 98765-4321" />
+      <br /><br />
+      <label for="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="name@email.com"
+      />
+      <br /><br />
+      <label for="password">Senha</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Digite sua senha"
+        minlength="8"
+      />
+      <br /><br />
+      <label for="password">Confirmar Senha</label>
+      <input
+        type="password"
+        name="password_confirm"
+        id="password_confirme"
+        placeholder="Repita sua senha"
+        minlength="8"
+      />
+      <br /><br />
+      <label for="birthday">Data de Nascimento</label>
+      <input type="date" name="birthday" id="birthday" />
+      <br /><br />
+      <p>Escolha seu turno:</p>
+      <label for="morning">Manhã</label>
+      <input type="radio" name="turn" id="morning" />
+      <label for="afternoon">Tarde</label>
+      <input type="radio" name="turn" id="afternoon" />
+      <label for="night">Noite</label>
+      <input type="radio" name="turn" id="night" />
+      <br /><br />
+      <p>Escolha seu curso:</p>
+      <label for="fs">Full Stack</label>
+      <input type="checkbox" name="course" id="fs" />
+      <label for="sm">Social Media</label>
+      <input type="checkbox" name="course" id="sm" />
+      <label for="ads">Paid Media</label>
+      <input type="checkbox" name="course" id="ads" />
+    </form>
+  </body>
+</html>
