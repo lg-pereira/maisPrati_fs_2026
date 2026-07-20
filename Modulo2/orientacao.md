@@ -11,3 +11,9 @@
 - ID
 - Classes
 - Tipo
+
+# JS
+
+### Web Components
+
+- Criados a partir de JS como web components reutilizáveis através de TAGS html
